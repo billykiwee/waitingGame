@@ -3,7 +3,6 @@ var getRandomID = function () {
     return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'.split('').sort(function () { return Math.random() - 0.5; }).splice(0, 4).join('').toString();
 };
 var blocks = document.querySelectorAll('.block');
-var lol = [1, 1, 2, 3, 4, 5, 6, 7, 8];
 function shuffleArray(array) {
     var _a;
     for (var i = array.length - 1; i > 0; i--) {
@@ -63,7 +62,7 @@ function playTheGame() {
                 }
                 emojiPickedByUser.splice(0, emojiPickedByUser.length);
                 blocks.forEach(function (e) { return e.classList.remove('compare'); });
-            }, 800);
+            }, 1000);
         }
         var _loop_1 = function (i) {
             emojisObject

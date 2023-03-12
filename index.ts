@@ -1,43 +1,5 @@
 const emojis = [
-    "😀", 
-    "😂", 
-    "😍", 
-    "🤔", 
-    "🤯", 
-    "👍", 
-    "👎", 
-    "🎉", 
-    "🎂", 
-    "🎁", 
-    "🐶", 
-    "🐱", 
-    "🐭", 
-    "🦊", 
-    "🐻", 
-    "🐼", 
-    "🐨", 
-    "🐯", 
-    "🐰", 
-    "🦁",
-    "🌞",
-    "🌈",
-    "🎓",
-    "🎸",
-    "🎭",
-    "🍔",
-    "🍟",
-    "🍩",
-    "🍭",
-    "🍹",
-    "🚀",
-    "🛸",
-    "🚲",
-    "🚕",
-    "🚑",
-    "🚒",
-    "🚔",
-    "🚗",
-    "🛵"
+    "😀", "😂", "😍", "🤔", "🤯", "👍", "👎", "🎉", "🎂", "🎁", "🐶", "🐱", "🐭", "🦊", "🐻", "🐼", "🐨", "🐯", "🐰", "🦁","🌞","🌈","🎓","🎸","🎭","🍔","🍟","🍩","🍭","🍹","🚀","🛸","🚲","🚕","🚑","🚒","🚔","🚗","🛵"
 ]
   
 const getRandomID = (): string => {
@@ -97,7 +59,15 @@ function playTheGame() {
         block.addEventListener('click', () => { clickBlock(block) })
     })
 
+    
+
     function clickBlock(block: HTMLDivElement) {
+
+        function blockUserClick2TimesOnABlock(block: HTMLDivElement) {
+            block.classList.add('compare')
+        }
+
+        blockUserClick2TimesOnABlock(block)
 
         emojiPickedByUser.push(block.id)
 
@@ -106,7 +76,8 @@ function playTheGame() {
         clics += 1
 
         const clicsIsOdd = clics % 2 == 0
-        
+
+
         if (clicsIsOdd) {
 
             blocks.forEach(e=> e.classList.add('compare'))
@@ -125,27 +96,49 @@ function playTheGame() {
             }
 
             const pairsEmojiMatch = isPairsMatches().match
-            
+
             const pairsEmoji = isPairsMatches().pairs
             
             if (pairsEmojiMatch) {
 
                 PairsFound.push(block.innerHTML)
             }  
-            
 
+            const getBlocksFound = (): HTMLDivElement[] => {
+
+                const blocksFound: HTMLDivElement[] = []
+              
+                for (let i = 0; i < pairsEmoji.length; i++) {
+
+                    const elements = document.querySelector<HTMLDivElement>('#' + pairsEmoji[i])
+
+                    if (elements) {
+
+                        blocksFound.push(elements)
+
+                        elements.classList.add('compare')
+                    }
+                }
+              
+                return blocksFound
+            }
+            
+            const blocksFound = getBlocksFound()
+            
             setTimeout(()=> {
 
-                for (let i = 0; i < pairsEmoji.length; i++) {
-                    document.querySelector('#'+ pairsEmoji[i])?.classList.remove('clicked')
-                }
+                blocksFound.forEach(blockFound=> {
+
+                    blockFound.classList.remove('clicked')
+
+                    blockFound.classList.add('compare')
+                })
 
                 emojiPickedByUser.splice(0, emojiPickedByUser.length)
                 
                 blocks.forEach(e=> e.classList.remove('compare'))
 
-            }, 1000)
-
+            }, 800)
         }
 
         for (let i = 0; i < PairsFound.length; i++) {
@@ -156,15 +149,16 @@ function playTheGame() {
                 return emoji.emoji == PairsFound[i]
             })
             .map(emoji=> {
-                
-                const el = document.querySelectorAll<HTMLDivElement>('#' + emoji.id)
 
+                const el = document.querySelectorAll<HTMLDivElement>('#' + emoji.id)
                 if (el) {
 
                     el.forEach(e=> {
                         e.classList.add('found')
 
-                        e.style.color = 'red'
+                        e.style.color = 'initial'
+
+                        e.classList.add('compare')
                     })
                 }
             })
@@ -181,7 +175,8 @@ function playTheGame() {
 
         if (parisFoundTxt) {
 
-            parisFoundTxt.innerHTML = PairsFound.length + `/ ${getRandomEmoji.length}`              
+            parisFoundTxt.innerHTML = PairsFound.length + ''
+
         }
 
         const clickCount = document.querySelector<HTMLDivElement>('#total-clics')
@@ -202,7 +197,7 @@ function Replay() {
     const replay = document.querySelector<HTMLButtonElement>('.replay')
             
     if (replay) {
-    
+        
         replay.onclick = () => window.location.href = ''
     }    
 }

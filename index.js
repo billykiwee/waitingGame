@@ -1,43 +1,5 @@
 var emojis = [
-    "😀",
-    "😂",
-    "😍",
-    "🤔",
-    "🤯",
-    "👍",
-    "👎",
-    "🎉",
-    "🎂",
-    "🎁",
-    "🐶",
-    "🐱",
-    "🐭",
-    "🦊",
-    "🐻",
-    "🐼",
-    "🐨",
-    "🐯",
-    "🐰",
-    "🦁",
-    "🌞",
-    "🌈",
-    "🎓",
-    "🎸",
-    "🎭",
-    "🍔",
-    "🍟",
-    "🍩",
-    "🍭",
-    "🍹",
-    "🚀",
-    "🛸",
-    "🚲",
-    "🚕",
-    "🚑",
-    "🚒",
-    "🚔",
-    "🚗",
-    "🛵"
+    "😀", "😂", "😍", "🤔", "🤯", "👍", "👎", "🎉", "🎂", "🎁", "🐶", "🐱", "🐭", "🦊", "🐻", "🐼", "🐨", "🐯", "🐰", "🦁", "🌞", "🌈", "🎓", "🎸", "🎭", "🍔", "🍟", "🍩", "🍭", "🍹", "🚀", "🛸", "🚲", "🚕", "🚑", "🚒", "🚔", "🚗", "🛵"
 ];
 var getRandomID = function () {
     return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'
@@ -76,6 +38,10 @@ function playTheGame() {
         block.addEventListener('click', function () { clickBlock(block); });
     });
     function clickBlock(block) {
+        function blockUserClick2TimesOnABlock(block) {
+            block.classList.add('compare');
+        }
+        blockUserClick2TimesOnABlock(block);
         emojiPickedByUser.push(block.id);
         block.classList.add('clicked');
         clics += 1;
@@ -98,14 +64,26 @@ function playTheGame() {
             if (pairsEmojiMatch) {
                 PairsFound.push(block.innerHTML);
             }
-            setTimeout(function () {
-                var _a;
+            var getBlocksFound = function () {
+                var blocksFound = [];
                 for (var i = 0; i < pairsEmoji_1.length; i++) {
-                    (_a = document.querySelector('#' + pairsEmoji_1[i])) === null || _a === void 0 ? void 0 : _a.classList.remove('clicked');
+                    var elements = document.querySelector('#' + pairsEmoji_1[i]);
+                    if (elements) {
+                        blocksFound.push(elements);
+                        elements.classList.add('compare');
+                    }
                 }
+                return blocksFound;
+            };
+            var blocksFound_1 = getBlocksFound();
+            setTimeout(function () {
+                blocksFound_1.forEach(function (blockFound) {
+                    blockFound.classList.remove('clicked');
+                    blockFound.classList.add('compare');
+                });
                 emojiPickedByUser.splice(0, emojiPickedByUser.length);
                 blocks.forEach(function (e) { return e.classList.remove('compare'); });
-            }, 1000);
+            }, 800);
         }
         var _loop_1 = function (i) {
             emojisObject
@@ -117,7 +95,8 @@ function playTheGame() {
                 if (el) {
                     el.forEach(function (e) {
                         e.classList.add('found');
-                        e.style.color = 'red';
+                        e.style.color = 'initial';
+                        e.classList.add('compare');
                     });
                 }
             });
@@ -131,7 +110,7 @@ function playTheGame() {
         }
         var parisFoundTxt = document.querySelector('#pairsFoundTxt');
         if (parisFoundTxt) {
-            parisFoundTxt.innerHTML = PairsFound.length + "/ ".concat(getRandomEmoji.length);
+            parisFoundTxt.innerHTML = PairsFound.length + '';
         }
         var clickCount = document.querySelector('#total-clics');
         if (clickCount) {

@@ -23,7 +23,7 @@
     justify-content: center;
     align-items: center;
     color: transparent;
-    transition: 0.1s ease;
+    transition: 0.4s ease;
     transform: rotateY(-180deg);
 }
 

@@ -11,8 +11,6 @@ interface Pairs {
     emoji: string
 }
 
-const lol = [1,1,2,3,4,5,6,7,8]
-
 function shuffleArray(array: string[]): string[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -102,7 +100,7 @@ function playTheGame() {
                 
                 blocks.forEach(e=> e.classList.remove('compare'))
 
-            }, 800)
+            }, 1000)
 
         }
 

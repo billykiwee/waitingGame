@@ -1,7 +1,52 @@
-const emojis : string[] = ["😂", "🚀", "🔥", "🤔", "👍", "🎉", "😍", "🙌"];
-
+const emojis = [
+    "😀", 
+    "😂", 
+    "😍", 
+    "🤔", 
+    "🤯", 
+    "👍", 
+    "👎", 
+    "🎉", 
+    "🎂", 
+    "🎁", 
+    "🐶", 
+    "🐱", 
+    "🐭", 
+    "🦊", 
+    "🐻", 
+    "🐼", 
+    "🐨", 
+    "🐯", 
+    "🐰", 
+    "🦁",
+    "🌞",
+    "🌈",
+    "🎓",
+    "🎸",
+    "🎭",
+    "🍔",
+    "🍟",
+    "🍩",
+    "🍭",
+    "🍹",
+    "🚀",
+    "🛸",
+    "🚲",
+    "🚕",
+    "🚑",
+    "🚒",
+    "🚔",
+    "🚗",
+    "🛵"
+]
+  
 const getRandomID = (): string => {
-    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'.split('').sort(()=> Math.random() -0.5).splice(0,4).join('').toString()
+    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'
+    .split('')
+    .sort(()=> Math.random() -0.5)
+    .splice(0,4)
+    .join('')
+    .toString()
 }
 
 const blocks = document.querySelectorAll<HTMLDivElement>('.block')
@@ -12,15 +57,18 @@ interface Pairs {
 }
 
 function shuffleArray(array: string[]): string[] {
+
     for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-  }
+}
 
+const getRandomEmoji = shuffleArray(emojis).splice(0,8)
   
-const emojiInGame: string[] = shuffleArray(emojis.concat(emojis.reverse()))
+const emojiInGame: string[] = shuffleArray(getRandomEmoji.concat(getRandomEmoji.reverse()))
 
 const emojisObject : Pairs[] = emojiInGame.map((emoji, i) => {
     return {
@@ -28,18 +76,6 @@ const emojisObject : Pairs[] = emojiInGame.map((emoji, i) => {
         emoji: emoji
     }
 })
-
-function fillAllBlock() {
-
-    for (let i = 0; i < emojisObject.length; i++) {
-
-        blocks[i].innerHTML = emojisObject[i].emoji
-
-        blocks[i].id = emojisObject[i].id
-    }
-}
-
-fillAllBlock() 
 
 const emojiPickedByUser: string[] = []
 
@@ -50,6 +86,13 @@ let clics: number = 0
 function playTheGame() {
     
     blocks.forEach(block=> {
+
+        for (let i = 0; i < emojisObject.length; i++) {
+
+            blocks[i].innerHTML = emojisObject[i].emoji
+    
+            blocks[i].id = emojisObject[i].id
+        }
 
         block.addEventListener('click', () => { clickBlock(block) })
     })
@@ -82,6 +125,7 @@ function playTheGame() {
             }
 
             const pairsEmojiMatch = isPairsMatches().match
+            
             const pairsEmoji = isPairsMatches().pairs
             
             if (pairsEmojiMatch) {
@@ -130,14 +174,14 @@ function playTheGame() {
         
         if (percentageDiv) {
 
-            percentageDiv.style.width = (PairsFound.length / emojis.length) * 100 + '%'
+            percentageDiv.style.width = (PairsFound.length / getRandomEmoji.length) * 100 + '%'
         }
 
         const parisFoundTxt = document.querySelector<HTMLDivElement>('#pairsFoundTxt')
 
         if (parisFoundTxt) {
 
-            parisFoundTxt.innerHTML = PairsFound.length + `/ ${emojis.length}`              
+            parisFoundTxt.innerHTML = PairsFound.length + `/ ${getRandomEmoji.length}`              
         }
 
         const clickCount = document.querySelector<HTMLDivElement>('#total-clics')

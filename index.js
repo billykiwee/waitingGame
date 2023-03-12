@@ -1,6 +1,51 @@
-var emojis = ["😂", "🚀", "🔥", "🤔", "👍", "🎉", "😍", "🙌"];
+var emojis = [
+    "😀",
+    "😂",
+    "😍",
+    "🤔",
+    "🤯",
+    "👍",
+    "👎",
+    "🎉",
+    "🎂",
+    "🎁",
+    "🐶",
+    "🐱",
+    "🐭",
+    "🦊",
+    "🐻",
+    "🐼",
+    "🐨",
+    "🐯",
+    "🐰",
+    "🦁",
+    "🌞",
+    "🌈",
+    "🎓",
+    "🎸",
+    "🎭",
+    "🍔",
+    "🍟",
+    "🍩",
+    "🍭",
+    "🍹",
+    "🚀",
+    "🛸",
+    "🚲",
+    "🚕",
+    "🚑",
+    "🚒",
+    "🚔",
+    "🚗",
+    "🛵"
+];
 var getRandomID = function () {
-    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'.split('').sort(function () { return Math.random() - 0.5; }).splice(0, 4).join('').toString();
+    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'
+        .split('')
+        .sort(function () { return Math.random() - 0.5; })
+        .splice(0, 4)
+        .join('')
+        .toString();
 };
 var blocks = document.querySelectorAll('.block');
 function shuffleArray(array) {
@@ -11,25 +56,23 @@ function shuffleArray(array) {
     }
     return array;
 }
-var emojiInGame = shuffleArray(emojis.concat(emojis.reverse()));
+var getRandomEmoji = shuffleArray(emojis).splice(0, 8);
+var emojiInGame = shuffleArray(getRandomEmoji.concat(getRandomEmoji.reverse()));
 var emojisObject = emojiInGame.map(function (emoji, i) {
     return {
         id: 'id-' + getRandomID(),
         emoji: emoji
     };
 });
-function fillAllBlock() {
-    for (var i = 0; i < emojisObject.length; i++) {
-        blocks[i].innerHTML = emojisObject[i].emoji;
-        blocks[i].id = emojisObject[i].id;
-    }
-}
-fillAllBlock();
 var emojiPickedByUser = [];
 var PairsFound = [];
 var clics = 0;
 function playTheGame() {
     blocks.forEach(function (block) {
+        for (var i = 0; i < emojisObject.length; i++) {
+            blocks[i].innerHTML = emojisObject[i].emoji;
+            blocks[i].id = emojisObject[i].id;
+        }
         block.addEventListener('click', function () { clickBlock(block); });
     });
     function clickBlock(block) {
@@ -84,11 +127,11 @@ function playTheGame() {
         }
         var percentageDiv = document.querySelector('#percentage');
         if (percentageDiv) {
-            percentageDiv.style.width = (PairsFound.length / emojis.length) * 100 + '%';
+            percentageDiv.style.width = (PairsFound.length / getRandomEmoji.length) * 100 + '%';
         }
         var parisFoundTxt = document.querySelector('#pairsFoundTxt');
         if (parisFoundTxt) {
-            parisFoundTxt.innerHTML = PairsFound.length + "/ ".concat(emojis.length);
+            parisFoundTxt.innerHTML = PairsFound.length + "/ ".concat(getRandomEmoji.length);
         }
         var clickCount = document.querySelector('#total-clics');
         if (clickCount) {

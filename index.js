@@ -1,9 +1,15 @@
-var emojis = ["😂", "🚀", "🔥", "🤔", "👍", "🎉", "😍", "🙌"];
+var emojis = [
+    "😀", "😂", "😍", "🤔", "🤯", "👍", "👎", "🎉", "🎂", "🎁", "🐶", "🐱", "🐭", "🦊", "🐻", "🐼", "🐨", "🐯", "🐰", "🦁", "🌞", "🌈", "🎓", "🎸", "🎭", "🍔", "🍟", "🍩", "🍭", "🍹", "🚀", "🛸", "🚲", "🚕", "🚑", "🚒", "🚔", "🚗", "🛵"
+];
 var getRandomID = function () {
-    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'.split('').sort(function () { return Math.random() - 0.5; }).splice(0, 4).join('').toString();
+    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'
+        .split('')
+        .sort(function () { return Math.random() - 0.5; })
+        .splice(0, 4)
+        .join('')
+        .toString();
 };
 var blocks = document.querySelectorAll('.block');
-var lol = [1, 1, 2, 3, 4, 5, 6, 7, 8];
 function shuffleArray(array) {
     var _a;
     for (var i = array.length - 1; i > 0; i--) {
@@ -12,28 +18,30 @@ function shuffleArray(array) {
     }
     return array;
 }
-var emojiInGame = shuffleArray(emojis.concat(emojis.reverse()));
+var getRandomEmoji = shuffleArray(emojis).splice(0, 8);
+var emojiInGame = shuffleArray(getRandomEmoji.concat(getRandomEmoji.reverse()));
 var emojisObject = emojiInGame.map(function (emoji, i) {
     return {
         id: 'id-' + getRandomID(),
         emoji: emoji
     };
 });
-function fillAllBlock() {
-    for (var i = 0; i < emojisObject.length; i++) {
-        blocks[i].innerHTML = emojisObject[i].emoji;
-        blocks[i].id = emojisObject[i].id;
-    }
-}
-fillAllBlock();
 var emojiPickedByUser = [];
 var PairsFound = [];
 var clics = 0;
 function playTheGame() {
     blocks.forEach(function (block) {
+        for (var i = 0; i < emojisObject.length; i++) {
+            blocks[i].innerHTML = emojisObject[i].emoji;
+            blocks[i].id = emojisObject[i].id;
+        }
         block.addEventListener('click', function () { clickBlock(block); });
     });
     function clickBlock(block) {
+        function blockUserClick2TimesOnABlock(block) {
+            block.classList.add('compare');
+        }
+        blockUserClick2TimesOnABlock(block);
         emojiPickedByUser.push(block.id);
         block.classList.add('clicked');
         clics += 1;
@@ -56,11 +64,23 @@ function playTheGame() {
             if (pairsEmojiMatch) {
                 PairsFound.push(block.innerHTML);
             }
-            setTimeout(function () {
-                var _a;
+            var getBlocksFound = function () {
+                var blocksFound = [];
                 for (var i = 0; i < pairsEmoji_1.length; i++) {
-                    (_a = document.querySelector('#' + pairsEmoji_1[i])) === null || _a === void 0 ? void 0 : _a.classList.remove('clicked');
+                    var elements = document.querySelector('#' + pairsEmoji_1[i]);
+                    if (elements) {
+                        blocksFound.push(elements);
+                        elements.classList.add('compare');
+                    }
                 }
+                return blocksFound;
+            };
+            var blocksFound_1 = getBlocksFound();
+            setTimeout(function () {
+                blocksFound_1.forEach(function (blockFound) {
+                    blockFound.classList.remove('clicked');
+                    blockFound.classList.add('compare');
+                });
                 emojiPickedByUser.splice(0, emojiPickedByUser.length);
                 blocks.forEach(function (e) { return e.classList.remove('compare'); });
             }, 800);
@@ -75,7 +95,8 @@ function playTheGame() {
                 if (el) {
                     el.forEach(function (e) {
                         e.classList.add('found');
-                        e.style.color = 'red';
+                        e.style.color = 'initial';
+                        e.classList.add('compare');
                     });
                 }
             });
@@ -85,11 +106,11 @@ function playTheGame() {
         }
         var percentageDiv = document.querySelector('#percentage');
         if (percentageDiv) {
-            percentageDiv.style.width = (PairsFound.length / emojis.length) * 100 + '%';
+            percentageDiv.style.width = (PairsFound.length / getRandomEmoji.length) * 100 + '%';
         }
         var parisFoundTxt = document.querySelector('#pairsFoundTxt');
         if (parisFoundTxt) {
-            parisFoundTxt.innerHTML = PairsFound.length + "/ ".concat(emojis.length);
+            parisFoundTxt.innerHTML = PairsFound.length + '';
         }
         var clickCount = document.querySelector('#total-clics');
         if (clickCount) {

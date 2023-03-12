@@ -10,42 +10,41 @@
     gap: 10px;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    width: 100%;
 }
 
 .block {
-    background-color: rgba(223, 223, 223, 0.397);
+    background-color: #f2f2f2;
     padding: 1rem;
-    width: 60px;
-    height: 60px;
     border-radius: 0.4rem;
     cursor: pointer;
     display: flex;
-    font-size: 2rem;
+    font-size: 2.5rem;
     justify-content: center;
     align-items: center;
     color: transparent;
-    transition: 0.1s ease;
+    transition: 0.4s ease;
     transform: rotateY(-180deg);
 }
 
 .block:hover {
-    background-color: rgba(128, 128, 128, 0.281);
+    background-color: rgba(128, 128, 128, 0.171);
 }
 
 .block.clicked {
-    background-color: rgba(79, 129, 221, 0.671);
+    background-color: #4286f43d;
     color: initial;
     transform: rotateY(0);
 }
 
 .block.found {
     background-color: rgba(26, 219, 106, 0.671);
+    transform: rotateY(0);
 }
 
 .block.compare {
     pointer-events: none;
 }
-
 
 .pairs {
     display: flex;
@@ -54,7 +53,7 @@
 }
 .pairs > div {
     background-color: rgba(223, 223, 223, 0.397);
-    border-radius: 0.4rem;
+    border-radius: 0.6rem;
     overflow: hidden;
 }
 .pairs-total-clic {
@@ -74,12 +73,21 @@
     gap: 10px;
 }
 
+.fillTxt {
+    font-size: 22px;
+}
+
+.flex > small {
+    color: rgba(0, 0, 0, 0.295);
+    font-size: 22px;
+}
+
 #pairsFound {
-    background-color: #5d8df527;
+    background-color: rgba(223, 223, 223, 0.397);
 }
 
 #pairsFound > div {
-    height: 0.4rem;
+    height: 0.5rem;
     width: 0%;
     background-color: #5d8df5;
     transition: 0.2s ease;
@@ -87,7 +95,7 @@
 }
 
 .replay {
-    background-color: rgb(54, 110, 214);
+    background-color: #4285f4;
     padding: 1rem;
     border: 0;
     color: white;
@@ -98,5 +106,6 @@
 
 .replay:hover {
     background-color: rgb(39, 97, 204);
+
 }
 

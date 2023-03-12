@@ -1,10 +1,19 @@
 var emojis = ["😂", "🚀", "🔥", "🤔", "👍", "🎉", "😍", "🙌"];
 var getRandomID = function () {
-    return 'azertyuiopqsdfghjklmwxcvbn1234567890'.split('').sort(function () { return Math.random() - 0.5; }).splice(0, 4).join('').toString();
+    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'.split('').sort(function () { return Math.random() - 0.5; }).splice(0, 4).join('').toString();
 };
 var blocks = document.querySelectorAll('.block');
-var emojiInGame = emojis.sort(function () { return Math.random() - 0.5; });
-var emojisObject = emojis.concat(emojis).map(function (emoji, i) {
+var lol = [1, 1, 2, 3, 4, 5, 6, 7, 8];
+function shuffleArray(array) {
+    var _a;
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        _a = [array[j], array[i]], array[i] = _a[0], array[j] = _a[1];
+    }
+    return array;
+}
+var emojiInGame = shuffleArray(emojis.concat(emojis.reverse()));
+var emojisObject = emojiInGame.map(function (emoji, i) {
     return {
         id: 'id-' + getRandomID(),
         emoji: emoji
@@ -13,7 +22,6 @@ var emojisObject = emojis.concat(emojis).map(function (emoji, i) {
 function fillAllBlock() {
     for (var i = 0; i < emojisObject.length; i++) {
         blocks[i].innerHTML = emojisObject[i].emoji;
-        blocks[i].classList.add(emojisObject[i].id);
         blocks[i].id = emojisObject[i].id;
     }
 }

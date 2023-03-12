@@ -1,7 +1,7 @@
 const emojis : string[] = ["😂", "🚀", "🔥", "🤔", "👍", "🎉", "😍", "🙌"];
 
 const getRandomID = (): string => {
-    return 'azertyuiopqsdfghjklmwxcvbn1234567890'.split('').sort(()=> Math.random() - 0.5).splice(0,4).join('').toString()
+    return 'azertyuiopqsdfghjklmwxcvbn1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'.split('').sort(()=> Math.random() -0.5).splice(0,4).join('').toString()
 }
 
 const blocks = document.querySelectorAll<HTMLDivElement>('.block')
@@ -11,9 +11,20 @@ interface Pairs {
     emoji: string
 }
 
-const emojiInGame: string[] = emojis.sort(()=> Math.random() - 0.5)
+const lol = [1,1,2,3,4,5,6,7,8]
 
-const emojisObject : Pairs[] = emojis.concat(emojis).map((emoji, i) => {
+function shuffleArray(array: string[]): string[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  
+const emojiInGame: string[] = shuffleArray(emojis.concat(emojis.reverse()))
+
+const emojisObject : Pairs[] = emojiInGame.map((emoji, i) => {
     return {
         id: 'id-' + getRandomID(),
         emoji: emoji
@@ -25,8 +36,6 @@ function fillAllBlock() {
     for (let i = 0; i < emojisObject.length; i++) {
 
         blocks[i].innerHTML = emojisObject[i].emoji
-    
-        blocks[i].classList.add(emojisObject[i].id)
 
         blocks[i].id = emojisObject[i].id
     }

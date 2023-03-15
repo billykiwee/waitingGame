@@ -126,3 +126,113 @@ function Replay() {
     }
 }
 Replay();
+/* type stateWidthType = 'right'|'left'
+
+type stateHeightType = 'top'|'bottom'
+
+const container = document.querySelector('.container') as HTMLDivElement
+
+if (container) {
+    container.innerHTML = `
+        <div class = "O"></div>
+        <div class = "O"></div>
+        <div class = "O"></div>
+        <div class = "O"></div>
+    `
+
+    container.style.width  = '400px'
+    container.style.height = '400px'
+    container.style.border = '1px solid black'
+
+}
+
+const bubble = document.querySelectorAll('.O') as NodeListOf<HTMLDivElement>;
+
+class Bubble {
+    constructor(container: HTMLDivElement, bubble: NodeListOf<HTMLDivElement>) {
+        this.container = container
+        this.bubble    = bubble
+    }
+
+    public speed = 1000
+
+    public x = 0
+
+    public y = 0
+
+    public stateWidth: stateWidthType = 'right'
+
+    public stateHeight: stateHeightType = 'bottom'
+
+    public speedControl = this.speed/1000
+
+    public counterBounding = 0
+
+    public direction = {
+        getRigth  : () => {
+            this.x += this.speedControl
+        },
+        getLeft   : () => {
+            this.x -= this.speedControl
+        },
+        getTop    : () => {
+            this.y += this.speedControl
+        },
+        getBottom : () => {
+            this.y -= this.speedControl
+        }
+    }
+
+    render() {
+
+        bubble.forEach(e=> {
+            this.x = Math.floor(Math.random() * 400)
+            this.y = Math.floor(Math.random() * 400)
+        })
+
+        
+        setInterval(e=> {
+
+            if (this.x == 0) {
+                this.stateWidth = 'right'
+            }
+        
+            if (this.x == 370) {
+                this.stateWidth = 'left'
+            }
+        
+            if (this.stateWidth == 'left') {
+                this.direction.getLeft()
+            }
+            else {
+                this.direction.getRigth()
+            }
+        
+            if (this.y == 0) {
+                this.stateHeight = 'bottom'
+            }
+        
+            if (this.y == 370) {
+                this.stateHeight = 'top'
+            }
+        
+            if (this.stateHeight == 'bottom') {
+                this.direction.getTop()
+            }
+            else {
+                this.direction.getBottom()
+            }
+        
+            if (this.bubble) {
+
+                this.bubble.forEach(e => {
+
+                    e.style.margin = `${this.x}px ${this.y}px`
+                });
+            }
+        }, 0)
+    }
+}
+
+new Bubble(container,bubble).render();
+ */ 

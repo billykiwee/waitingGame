@@ -11,7 +11,7 @@ const getRandomID = (): string => {
     .toString()
 }
 
-const blocks = document.querySelectorAll<HTMLDivElement>('.block')
+const blocks = document.querySelectorAll<HTMLDivElement>('.block') 
 
 interface Pairs {
     id   : string
@@ -27,7 +27,7 @@ function shuffleArray(array: string[]): string[] {
     }
     return array;
 }
-
+ 
 const getRandomEmoji = shuffleArray(emojis).splice(0,8)
   
 const emojiInGame: string[] = shuffleArray(getRandomEmoji.concat(getRandomEmoji.reverse()))

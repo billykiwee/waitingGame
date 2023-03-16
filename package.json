@@ -11,5 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.21"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.3"
   }
 }

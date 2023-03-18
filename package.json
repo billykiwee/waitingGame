@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon --watch 'index.ts' --exec 'tsc index.ts && node index.js'"
+    "start": "nodemon --watch 'index.ts' --exec 'tsc index.ts && node index.js' && start http://localhost:3000"
   },
   "author": "Billy",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
+    "@types/node": "^18.15.3",
     "nodemon": "^2.0.21"
+  },
+  "devDependencies": {
+    "open": "^8.4.2"
   }
 }

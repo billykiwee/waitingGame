@@ -202,13 +202,15 @@ if (typeof document !== 'undefined') {
                 
         if (replay) {
             
-            replay.onclick = () => window.location.href = ''
+            replay.onclick = () => {
+               // window.location.href = ''
+            }
         }    
     }
     
     Replay()
     
-    
+
     
     
     /* type stateWidthType = 'right'|'left'

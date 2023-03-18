@@ -123,7 +123,9 @@ if (typeof document !== 'undefined') {
     function Replay() {
         var replay = document.querySelector('.replay');
         if (replay) {
-            replay.onclick = function () { return window.location.href = ''; };
+            replay.onclick = function () {
+                // window.location.href = ''
+            };
         }
     }
     Replay();

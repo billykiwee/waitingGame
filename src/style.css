@@ -134,6 +134,7 @@ h1, span {
     border-radius: 0.4rem;
     font-size: 16px;
     cursor: pointer;
+    display: none;
 }
 
 .replay:hover {

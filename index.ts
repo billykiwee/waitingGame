@@ -14,7 +14,7 @@ const getRandomID = (): string => {
 if (typeof document !== 'undefined') {
 
     const blocks = document.querySelectorAll<HTMLDivElement>('.block') 
-    
+
     
     interface Pairs {
         id   : string
@@ -47,29 +47,29 @@ if (typeof document !== 'undefined') {
     const PairsFound: string[] = []
     
     let clics: number = 0
-    
-
-
 
 
 
     
-
     
     function playTheGame() {
         
-        blocks.forEach(block=> {
-    
-            for (let i = 0; i < emojisObject.length; i++) {
-    
-                blocks[i].innerHTML = emojisObject[i].emoji
+
+        function initialiseBlocks() {
+            blocks.forEach(block=> {
         
-                blocks[i].id = emojisObject[i].id
-            }
-    
-            block.addEventListener('click', () => { clickBlock(block) })
-        })
-    
+                for (let i = 0; i < emojisObject.length; i++) {
+        
+                    blocks[i].innerHTML = emojisObject[i].emoji
+            
+                    blocks[i].id = emojisObject[i].id
+                }
+        
+                block.addEventListener('click', () => { clickBlock(block) })
+            })
+        
+        }
+        initialiseBlocks()
         
     
         function clickBlock(block: HTMLDivElement) {
@@ -174,6 +174,12 @@ if (typeof document !== 'undefined') {
                     }
                 })
             }
+
+            if (PairsFound.length == 8) {
+                if (replay) {
+                    replay.style.display = 'flex'
+                }
+            }
     
             const percentageDiv = document.querySelector<HTMLDivElement>('#percentage')
             
@@ -187,7 +193,6 @@ if (typeof document !== 'undefined') {
             if (parisFoundTxt) {
     
                 parisFoundTxt.innerHTML = PairsFound.length + ''
-    
             }
     
             const clickCount = document.querySelector<HTMLDivElement>('#total-clics')
@@ -202,10 +207,10 @@ if (typeof document !== 'undefined') {
     
     playTheGame()
     
+    const replay = document.querySelector<HTMLButtonElement>('.replay')
     
     function Replay() {
         
-        const replay = document.querySelector<HTMLButtonElement>('.replay')
                 
         if (replay) {
             

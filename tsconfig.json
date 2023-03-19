@@ -6,6 +6,6 @@
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
-    "lib": ["es6", "dom"]
+    "lib": ["es6", "dom"],
   }
 }

@@ -21,10 +21,14 @@ h1, span {
     grid-template-rows: repeat(4, 1fr);
 }
 
+@media (max-width: 768px) {
+    .block {
+        font-size: 3rem!important;
+    }  
+}
 @media (min-width: 768px) {
     .block {
-        min-width: 100px;
-        font-size: 2rem;
+        width: 100px;
     }  
 }
 
@@ -37,7 +41,6 @@ h1, span {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    font-size: 4rem;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -45,10 +48,11 @@ h1, span {
     -ms-flex-align: center;
     align-items: center;
     color: transparent;
-    -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
     -webkit-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
+    font-size: 4rem;
 }
 
 .block:hover {

@@ -160,3 +160,9 @@ h1, span {
     width: 2rem;
     background-color: blue;
 }
+
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
